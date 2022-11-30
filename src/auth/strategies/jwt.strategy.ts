@@ -17,6 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
   ) {
+    /* Calling the super class constructor and passing in the options object. */
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -24,6 +25,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  /**
+   * It takes a JwtPayload object as an argument, and returns a Promise of an array of User objects
+   * @param {JwtPayload} payload - JwtPayload
+   * @returns The user object
+   */
   async validate(payload: JwtPayload): Promise<User[]> {
     const { email } = payload;
     const user = this.userRepo.findBy({ email });

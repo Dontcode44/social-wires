@@ -59,6 +59,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * It takes a LoginUserDto object, finds the user by email, compares the password, and if the user
+   * exists and the password matches, it returns an access token
+   * @param {LoginUserDto} loginUser - LoginUserDto - This is the DTO that we created earlier.
+   * @returns { accessToken: string }
+   */
   async loginUser(loginUser: LoginUserDto): Promise<{ accessToken: string }> {
     const { email, password } = loginUser;
 
