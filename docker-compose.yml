@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  database:
+    image: postgres:13
+    container_name: social_wires
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: social_pwd
+      POSTGRES_USER: postgres
+      POSTGRES_DB: social_w
+    ports:
+      - 5450:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgres
