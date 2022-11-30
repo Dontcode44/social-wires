@@ -50,12 +50,6 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Stay in touch
+## See more of me
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Linkendn - [Héctor Andrés]([https://twitter.com/nestframework](https://www.linkedin.com/in/h%C3%A9ctor-andr%C3%A9s-ordo%C3%B1ez-/))
