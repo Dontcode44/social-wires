@@ -36,6 +36,11 @@ export class UsersService {
     return foundId;
   }
 
+  /**
+   * It returns a promise of an array of users, and it takes a userId as a parameter
+   * @param {string} userId - string
+   * @returns An array of users
+   */
   async getAllUsers(userId: string): Promise<User[]> {
     const foundAll = this.usersRepository.find({
       where: {

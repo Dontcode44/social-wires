@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { Message } from './entities/message.entity';
 
@@ -28,5 +28,44 @@ export class MessagesService {
     message.user = userFound;
     await this.messagesRepository.save(message);
     return message;
+  }
+
+  /**
+   * It returns all messages from the database that are associated with the userId passed in as a
+   * parameter
+   * @param {string} userId - string - the id of the user we want to get the messages for
+   * @returns An array of messages
+   */
+  async getAllMessages(userId: string): Promise<Message[]> {
+    const query = await this.messagesRepository
+      .createQueryBuilder('message')
+      .leftJoinAndSelect('message.user', 'user')
+      .where('user.id = :userId', { userId })
+      .getMany();
+    return query;
+  }
+
+  async searchAuthorMessages(
+    userId: string,
+    author: string,
+  ): Promise<Message[]> {
+    const query = await this.messagesRepository
+      .createQueryBuilder('message')
+      .leftJoinAndSelect('message.user', 'user')
+      .where('user.id = :userId', { userId })
+      .andWhere('user.firstName ILIKE :author', { author: `%${author}%` })
+      .getMany();
+
+    return query;
+  }
+
+  async getAllMessagesAuthors(author: string): Promise<Message[]> {
+    const query = await this.messagesRepository
+      .createQueryBuilder('message')
+      .leftJoinAndSelect('message.user', 'user')
+      .where('user.firstName ILIKE :author', { author: `%${author}%` })
+      .getMany();
+
+    return query;
   }
 }

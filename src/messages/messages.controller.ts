@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { Userd } from 'src/auth/decorators/token.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { MiddleGuard } from 'src/auth/guards/middle.guard';
@@ -18,5 +18,24 @@ export class MessagesController {
     @Body() createMessageDto: CreateMessageDto,
   ) {
     return await this.messagesService.createMessage(user.id, createMessageDto);
+  }
+
+  @UseGuards(MiddleGuard)
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  async getAllMessages(@Userd() user: User) {
+    return await this.messagesService.getAllMessages(user.id);
+  }
+
+  @UseGuards(MiddleGuard)
+  @UseGuards(JwtAuthGuard)
+  @Get('search')
+  async searchTittle(@Userd() user: User, @Query('author') author: string) {
+    return await this.messagesService.searchAuthorMessages(user.id, author);
+  }
+
+  @Get('all')
+  async getAllMessagesWithUser(@Query('author') author: string) {
+    return await this.messagesService.getAllMessagesAuthors(author);
   }
 }
