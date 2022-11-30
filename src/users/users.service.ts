@@ -22,4 +22,27 @@ export class UsersService {
     }
     return foundEmail;
   }
+
+  /**
+   * It finds a user by id and if it doesn't exist, it throws an error
+   * @param {string} id - string - The id of the user we want to find.
+   * @returns The user with the id that was passed in.
+   */
+  async findById(id: string): Promise<User> {
+    const foundId = this.usersRepository.findOne({ where: { id } });
+    if (!foundId) {
+      throw new HttpException('Not exist', HttpStatus.NOT_FOUND);
+    }
+    return foundId;
+  }
+
+  async getAllUsers(userId: string): Promise<User[]> {
+    const foundAll = this.usersRepository.find({
+      where: {
+        id: userId,
+      },
+    });
+    return foundAll;
+  }
 }
+

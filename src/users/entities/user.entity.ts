@@ -1,7 +1,9 @@
+import { Message } from 'src/messages/entities/message.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -24,6 +26,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Message, (message) => message.user)
+  messages: Message[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
