@@ -52,4 +52,4 @@ $ npm run start:prod
 
 ## See more of me
 
-- Linkendn - [Héctor Andrés]([https://twitter.com/nestframework](https://www.linkedin.com/in/h%C3%A9ctor-andr%C3%A9s-ordo%C3%B1ez-/))
+- Linkendn - [Héctor Andrés]((https://www.linkedin.com/in/h%C3%A9ctor-andr%C3%A9s-ordo%C3%B1ez-/))
